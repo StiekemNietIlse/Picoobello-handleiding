@@ -3,7 +3,7 @@ import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 //import {HomeScreen} from './components/screen';
-import {Button, Text, View} from 'react-native';
+import {Button, Image, Text, View} from 'react-native';
 import Example2 from './components/screen';
 
 import * as data from './json/data.json';
@@ -51,12 +51,14 @@ const HomeScreen = ({navigation, route}) => {
       );
     }
   } else {
+    console.log(data.pages[0].imgpath);
     return (
       <>
         <View>
           <View>
             <Text>{data.pages[0].name}</Text>
             <Text>{data.pages[0].text}</Text>
+            <Image source={{ './images/Background.png'} />
           </View>
           <Button
             title="to page 2"

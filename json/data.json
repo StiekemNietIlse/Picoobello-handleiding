@@ -5,7 +5,9 @@
  {
    "name": "page1",
     "text": "Dit is de teskt van pagina 1",
-    "question": " dit is een vraag van pagina 1"
+    "question": " dit is een vraag van pagina 1",
+    "imgpath": "./images/Background.png"
+
   },
   {
     "name": "page2",
