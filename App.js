@@ -2,9 +2,15 @@ import 'react-native-gesture-handler';
 import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import {Button, Text} from 'react-native';
-const Stack = createStackNavigator();
+//import {HomeScreen} from './components/screen';
+import {Button, Text, View} from 'react-native';
+import Example2 from './components/screen';
 
+import * as data from './json/data.json';
+import pages from "./json/data.json";
+const test = 'hallo dit is een test';
+const Stack = createStackNavigator();
+//const Array = JSON.parse(data);
 const App = () => {
   return (
     <NavigationContainer>
@@ -22,24 +28,51 @@ const App = () => {
     </NavigationContainer>
   );
 };
-const HomeScreen = ({navigation}) => {
-  return (
-    <>
-      <Button
-        title="Go to Jane's profile"
-        onPress={() =>
-          navigation.navigate('Profile', {
-            text: '1',
-            link: 'Profile2',
-          })
-        }
-      />
-      <Text>test</Text>
-    </>
-  );
+
+const HomeScreen = ({navigation, route}) => {
+  if (route.params) {
+    if (route.params.number) {
+      console.log(route.params.number);
+      return (
+        <View>
+          <View>
+            <Text>{data.pages[route.params.number - 1].name}</Text>
+            <Text>{data.pages[route.params.number - 1].text}</Text>
+          </View>
+          <Button
+            title="next page"
+            onPress={() =>
+              navigation.navigate('Home', {
+                number: route.params.number + 1,
+              })
+            }
+          />
+        </View>
+      );
+    }
+  } else {
+    return (
+      <>
+        <View>
+          <View>
+            <Text>{data.pages[0].name}</Text>
+            <Text>{data.pages[0].text}</Text>
+          </View>
+          <Button
+            title="to page 2"
+            onPress={() =>
+              navigation.navigate('Home', {
+                number: 2,
+              })
+            }
+          />
+        </View>
+      </>
+    );
+  }
 };
+
 const ProfileScreen = ({navigation, route}) => {
-  
   return (
     <>
       <Button
