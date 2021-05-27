@@ -14,7 +14,6 @@ import {
 } from 'react-native';
 
 import pages from './json/pages';
-const test = 'hallo dit is een test';
 const Stack = createStackNavigator();
 
 const SCREEN_HEIGHT = Dimensions.get('window').height;
@@ -58,8 +57,12 @@ const HomeScreen = ({navigation, route}) => {
               style={{width: 200, height: 200, resizeMode: 'contain'}}
               source={pages[0].imagePath}
             />
-            <Text>{pages[route.params.number - 1].name}</Text>
-            <Text>{pages[route.params.number - 1].text}</Text>
+            <Text style={{textAlign: 'center', marginBottom: '5%'}}>
+              {pages[route.params.number - 1].name}
+            </Text>
+            <Text style={{textAlign: 'center', marginBottom: '5%'}}>
+              {pages[route.params.number - 1].text}
+            </Text>
           </View>
           <TouchableOpacity
             onPress={() =>
@@ -76,7 +79,7 @@ const HomeScreen = ({navigation, route}) => {
             }}>
             <Text
               style={{textAlign: 'center', color: 'white', fontWeight: '800'}}>
-              next page
+              Ja, ga verder
             </Text>
           </TouchableOpacity>
         </ImageBackground>
@@ -100,13 +103,19 @@ const HomeScreen = ({navigation, route}) => {
             height: SCREEN_HEIGHT,
           }}>
           <View>
-            <Text>{pages[0].name}</Text>
             <Image
               style={{width: 200, height: 200, resizeMode: 'contain'}}
               source={pages[0].imagePath}
             />
-            <Text>{pages[0].text}</Text>
+            <Text style={{textAlign: 'center', marginBottom: '5%'}}>
+              {pages[0].name}
+            </Text>
+            <Text style={{textAlign: 'center', marginBottom: '5%'}}>
+              {pages[0].text}
+            </Text>
             <Text>{pages[0].question}</Text>
+
+
           </View>
           <TouchableOpacity
             onPress={() =>
@@ -123,7 +132,7 @@ const HomeScreen = ({navigation, route}) => {
             }}>
             <Text
               style={{textAlign: 'center', color: 'white', fontWeight: '800'}}>
-              To page 2
+              Picoo opstarten
             </Text>
           </TouchableOpacity>
         </ImageBackground>
