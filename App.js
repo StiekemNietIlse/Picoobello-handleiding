@@ -23,24 +23,23 @@ const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen
-          name="Home"
-          component={HomeScreen}
-          options={{title: 'Welcome'}}
-        />
-        <Stack.Screen name="Profile" component={ProfileScreen} />
-        <Stack.Screen name="Profile2" component={ProfileScreen} />
-        <Stack.Screen name="Profile3" component={ProfileScreen} />
+        <Stack.Screen name="HomeScreen" component={HomeScreen} />
+        <Stack.Screen name="Home" component={ContinuesPage} />
         <Stack.Screen name="Test" component={TestScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
 };
 
-const HomeScreen = ({navigation, route}) => {
+const ContinuesPage = ({navigation, route}) => {
+  console.log(route.params);
   if (route.params) {
     if (route.params.number) {
-      console.log(route.params.number);
+      let index = pages[route.params.number - 1].toString().split('/');
+      let lastPage = false;
+      if (index[0] === index[1]) {
+        lastPage = true;
+      }
       return (
         <ImageBackground
           source={require('./images/Background.png')}
@@ -53,107 +52,140 @@ const HomeScreen = ({navigation, route}) => {
             height: SCREEN_HEIGHT,
           }}>
           <View>
-            <Image
-              style={{width: 200, height: 200, resizeMode: 'contain'}}
-              source={pages[0].imagePath}
-            />
-            <Text style={{textAlign: 'center', marginBottom: '5%'}}>
+            <Text
+              style={{textAlign: 'center', marginBottom: '5%', fontSize: 25}}>
               {pages[route.params.number - 1].name}
             </Text>
+            <Image
+              style={{width: 700, height: 700, resizeMode: 'contain'}}
+              source={pages[route.params.number - 1].imagePath}
+            />
             <Text style={{textAlign: 'center', marginBottom: '5%'}}>
               {pages[route.params.number - 1].text}
             </Text>
-          </View>
-          <TouchableOpacity
-            onPress={() =>
-              navigation.navigate('Home', {
-                number: route.params.number + 1,
-              })
-            }
-            style={{
-              marginTop: '10%',
-              backgroundColor: 'blue',
-              width: '50%',
-              padding: '2%',
-              borderRadius: 50,
-            }}>
-            <Text
-              style={{textAlign: 'center', color: 'white', fontWeight: '800'}}>
-              Ja, ga verder
+            {pages[route.params.number - 1].information == undefined ? (
+              <Text />
+            ) : (
+              <Text
+                style={{
+                  textAlign: 'center',
+                  color: '#292D78',
+                  marginBottom: '5%',
+                  backgroundColor: '#C8EBFB',
+                }}>
+                {pages[route.params.number - 1].information}
+              </Text>
+            )}
+            <Text style={{textAlign: 'center', marginBottom: '5%'}}>
+              {pages[route.params.number - 1].question}
             </Text>
-          </TouchableOpacity>
+          </View>
+          {route.params.number - 1 == '6' ? (
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate('HomeScreen', {
+                  number: 0,
+                })
+              }
+              style={{
+                marginTop: '10%',
+                backgroundColor: 'blue',
+                width: '50%',
+                padding: '2%',
+                borderRadius: 50,
+              }}>
+              <Text
+                style={{
+                  textAlign: 'center',
+                  color: 'white',
+                  fontWeight: '800',
+                }}>
+                Ja, ga verder
+              </Text>
+            </TouchableOpacity>
+          ) : (
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate('Home', {
+                  number: route.params.number + 1,
+                })
+              }
+              style={{
+                marginTop: '10%',
+                backgroundColor: 'blue',
+                width: '50%',
+                padding: '2%',
+                borderRadius: 50,
+              }}>
+              <Text
+                style={{
+                  textAlign: 'center',
+                  color: 'white',
+                  fontWeight: '800',
+                }}>
+                Ja, ga verder
+              </Text>
+            </TouchableOpacity>
+          )}
         </ImageBackground>
       );
     }
-  } else {
-    {
-      let imagePath = pages[0].imgpath;
-    }
-
-    return (
-      <>
-        <ImageBackground
-          source={require('./images/Background.png')}
-          style={{
-            flex: 1,
-            justifyContent: 'center',
-            alignItems: 'center',
-            resizeMode: 'cover',
-            width: SCREEN_WIDTH,
-            height: SCREEN_HEIGHT,
-          }}>
-          <View>
-            <Image
-              style={{width: 200, height: 200, resizeMode: 'contain'}}
-              source={pages[0].imagePath}
-            />
-            <Text style={{textAlign: 'center', marginBottom: '5%'}}>
-              {pages[0].name}
-            </Text>
-            <Text style={{textAlign: 'center', marginBottom: '5%'}}>
-              {pages[0].text}
-            </Text>
-            <Text>{pages[0].question}</Text>
-
-
-          </View>
-          <TouchableOpacity
-            onPress={() =>
-              navigation.navigate('Home', {
-                number: 2,
-              })
-            }
-            style={{
-              marginTop: '10%',
-              backgroundColor: 'blue',
-              width: '50%',
-              padding: '2%',
-              borderRadius: 50,
-            }}>
-            <Text
-              style={{textAlign: 'center', color: 'white', fontWeight: '800'}}>
-              Picoo opstarten
-            </Text>
-          </TouchableOpacity>
-        </ImageBackground>
-      </>
-    );
   }
 };
 
-const ProfileScreen = ({navigation, route}) => {
+const HomeScreen = ({navigation}) => {
   return (
     <>
-      <Button
-        title={route.params.link.toString()}
-        onPress={() =>
-          navigation.navigate(route.params.link, {
-            text: 'hgfhgjfjffggfisgggggggggggggggggdgddddddddddddddddddddddd',
-            link: 'Profile3',
-          })
-        }
-      />
-      <Text>{route.params.text}</Text>
+      <ImageBackground
+        source={require('./images/Background.png')}
+        style={{
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+          resizeMode: 'cover',
+          width: SCREEN_WIDTH,
+          height: SCREEN_HEIGHT,
+          backgroundColor: ' white',
+        }}>
+        <View>
+          <Image
+            style={{width: 400, height: 400, resizeMode: 'contain'}}
+            source={pages[0].imagePath}
+          />
+          <Text
+            style={{
+              textAlign: 'center',
+              fontSize: 30,
+              marginBottom: '5%',
+              color: '#292D78',
+            }}>
+            {pages[0].text}
+          </Text>
+          <Text>{pages[0].question}</Text>
+        </View>
+        <TouchableOpacity
+          onPress={() =>
+            navigation.navigate('Home', {
+              number: 2,
+            })
+          }
+          style={{
+            marginTop: '10%',
+            backgroundColor: 'blue',
+            width: '50%',
+            padding: '2%',
+            borderRadius: 50,
+          }}>
+          <Text
+            style={{
+              textAlign: 'center',
+              fontWeight: '800',
+              color: 'white',
+            }}>
+            Picoo opstarten
+          </Text>
+        </TouchableOpacity>
+      </ImageBackground>
     </>
   );
 };
