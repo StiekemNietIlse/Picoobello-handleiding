@@ -1,0 +1,25 @@
+const pages = [
+  {
+    name: 'page1',
+    text: 'Dit is de teskt van pagina 1',
+    question: ' dit is een vraag van pagina 1',
+    imgpath: require('../images/Background.png'),
+  },
+  {
+    name: 'page2',
+    text: 'Dit is de teskt van pagina 2',
+    question: ' dit is een vraag van pagina 2',
+  },
+  {
+    name: 'page3',
+    text: 'Dit is de teskt van pagina 3',
+    question: ' dit is een vraag van pagina 3',
+  },
+  {
+    name: 'page4',
+    text: 'Dit is de teskt van pagina 4',
+    question: ' dit is een vraag van pagina 4',
+  },
+];
+
+export default pages;

@@ -5,12 +5,12 @@ import {createStackNavigator} from '@react-navigation/stack';
 //import {HomeScreen} from './components/screen';
 import {Button, Image, Text, View} from 'react-native';
 import Example2 from './components/screen';
-
-import * as data from './json/data.json';
-import pages from "./json/data.json";
+//import * as data from './json/data.json';
+import pages from './json/pages';
 const test = 'hallo dit is een test';
 const Stack = createStackNavigator();
 //const Array = JSON.parse(data);
+
 const App = () => {
   return (
     <NavigationContainer>
@@ -36,8 +36,8 @@ const HomeScreen = ({navigation, route}) => {
       return (
         <View>
           <View>
-            <Text>{data.pages[route.params.number - 1].name}</Text>
-            <Text>{data.pages[route.params.number - 1].text}</Text>
+            <Text>{pages[route.params.number - 1].name}</Text>
+            <Text>{pages[route.params.number - 1].text}</Text>
           </View>
           <Button
             title="next page"
@@ -51,14 +51,18 @@ const HomeScreen = ({navigation, route}) => {
       );
     }
   } else {
-    console.log(data.pages[0].imgpath);
+    {
+    }
+
+    console.log(pages[0].imgpath);
     return (
       <>
         <View>
           <View>
-            <Text>{data.pages[0].name}</Text>
-            <Text>{data.pages[0].text}</Text>
-            <Image source={{ './images/Background.png'} />
+            <Text>{pages[0].name}</Text>
+            <Text>{pages[0].text}</Text>
+            <Text>{pages[0].question}</Text>
+            <Image source={pages[0].imgpath} />
           </View>
           <Button
             title="to page 2"
