@@ -2,14 +2,23 @@ import 'react-native-gesture-handler';
 import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-//import {HomeScreen} from './components/screen';
-import {Button, Image, Text, View} from 'react-native';
-import Example2 from './components/screen';
-//import * as data from './json/data.json';
+
+import {
+  Button,
+  Image,
+  Text,
+  View,
+  ImageBackground,
+  Dimensions,
+  TouchableOpacity,
+} from 'react-native';
+
 import pages from './json/pages';
 const test = 'hallo dit is een test';
 const Stack = createStackNavigator();
-//const Array = JSON.parse(data);
+
+const SCREEN_HEIGHT = Dimensions.get('window').height;
+const SCREEN_WIDTH = Dimensions.get('window').width;
 
 const App = () => {
   return (
@@ -34,45 +43,90 @@ const HomeScreen = ({navigation, route}) => {
     if (route.params.number) {
       console.log(route.params.number);
       return (
-        <View>
+        <ImageBackground
+          source={require('./images/Background.png')}
+          style={{
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+            resizeMode: 'cover',
+            width: SCREEN_WIDTH,
+            height: SCREEN_HEIGHT,
+          }}>
           <View>
+            <Image
+              style={{width: 200, height: 200, resizeMode: 'contain'}}
+              source={pages[0].imagePath}
+            />
             <Text>{pages[route.params.number - 1].name}</Text>
             <Text>{pages[route.params.number - 1].text}</Text>
           </View>
-          <Button
-            title="next page"
+          <TouchableOpacity
             onPress={() =>
               navigation.navigate('Home', {
                 number: route.params.number + 1,
               })
             }
-          />
-        </View>
+            style={{
+              marginTop: '10%',
+              backgroundColor: 'blue',
+              width: '50%',
+              padding: '2%',
+              borderRadius: 50,
+            }}>
+            <Text
+              style={{textAlign: 'center', color: 'white', fontWeight: '800'}}>
+              next page
+            </Text>
+          </TouchableOpacity>
+        </ImageBackground>
       );
     }
   } else {
     {
+      let imagePath = pages[0].imgpath;
     }
 
-    console.log(pages[0].imgpath);
     return (
       <>
-        <View>
+        <ImageBackground
+          source={require('./images/Background.png')}
+          style={{
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+            resizeMode: 'cover',
+            width: SCREEN_WIDTH,
+            height: SCREEN_HEIGHT,
+          }}>
           <View>
             <Text>{pages[0].name}</Text>
+            <Image
+              style={{width: 200, height: 200, resizeMode: 'contain'}}
+              source={pages[0].imagePath}
+            />
             <Text>{pages[0].text}</Text>
             <Text>{pages[0].question}</Text>
-            <Image source={pages[0].imgpath} />
           </View>
-          <Button
-            title="to page 2"
+          <TouchableOpacity
             onPress={() =>
               navigation.navigate('Home', {
                 number: 2,
               })
             }
-          />
-        </View>
+            style={{
+              marginTop: '10%',
+              backgroundColor: 'blue',
+              width: '50%',
+              padding: '2%',
+              borderRadius: 50,
+            }}>
+            <Text
+              style={{textAlign: 'center', color: 'white', fontWeight: '800'}}>
+              To page 2
+            </Text>
+          </TouchableOpacity>
+        </ImageBackground>
       </>
     );
   }
